@@ -1,0 +1,109 @@
+<!-- Start Screen -->
+<div id="wrapperStart" class="center" *ngIf="!gameStarted">
+  <div class="bigSansSerif">Rock | Paper | Scissors</div>
+  <div id="containerStart" class="grid mediumHandWritten">
+    <!-- List available players 
+    TODO: take content with ngFor from fighters array (create Directive for function)-->
+    <div>
+      <button (click)="select('detective-horse')" style="background-image: url('assets/img/detective-horse.png');" class="fighterImg selectable"></button>
+      <div>Detective Horse</div>
+    </div>
+    <div>
+      <button (click)="select('hacker-boy')" style="background-image: url('assets/img/hacker-boy.png');" class="fighterImg selectable"></button>
+      <div>Hacker Boy</div>
+    </div>
+    <div>
+      <button (click)="select('knighty-knight')" style="background-image: url('assets/img/knighty-knight.png');" class="fighterImg selectable"></button>
+      <div>Knighty Knight</div>
+    </div>
+    <div>
+      <button (click)="select('greg')" style="background-image: url('assets/img/greg.png');" class="fighterImg selectable"></button>
+      <div>Greg</div>
+    </div>
+  </div>
+  <div class="mediumSansSerif">Choose Your Fighter</div>
+</div>
+
+<!-- Game Screen -->
+<div id="wrapper" class="center" *ngIf="gameStarted">
+  <div class="bigSansSerif">Rock | Paper | Scissors</div>
+
+  <div id="containerMatch" class="grid mediumHandWritten" *ngIf="!gameOver">
+
+    <div class="center">
+      <div>You</div>
+      <img class="fighterImg" src="assets/img/{{ playerFighterCode }}.png" alt="{{ playerFighterCode }}" />
+      <div>{{ playerFighterDisplay }}</div>
+    </div>
+
+    <div class="center bigHandWritten">VS</div>
+
+    <div class="center">
+      <div>Enemy</div>
+      <img class="fighterImg" src="assets/img/{{ aiFighterCode }}.png" alt="{{ aiFighterCode }}" />
+      <div>{{ aiFighterDisplay }}</div>
+    </div>
+    
+  </div>
+
+  <div *ngIf="!moveMade && !gameOver" class="RPSContainer center" id="playerRPSContainer">
+    <div class="mediumSansSerif grid1-4" *ngIf="!gameOver">
+      <div>Round {{ round + 1 }}</div>
+    </div>
+    <div
+      class="RPSChoice playerRPS {{ val }}"
+      *ngFor="let val of rps"
+      (click)="makeMove(val)"
+      [ngStyle]="{ 'background-image': 'url(assets/img/' + val + '.png)'}"
+    >
+    </div>
+  </div>
+
+  <div *ngIf="moveMade && !gameOver" class="RPSContainer center">
+    <div class="mediumSansSerif grid1-4" *ngIf="!gameOver">
+      <div *ngIf="moveMade">{{ matchResult }}</div>
+    </div>
+    <div class="RPSChoice"
+      [ngStyle]="{ 'background-image': 'url(assets/img/' + playerChoice + '.png)'}"
+    >
+    </div>
+    <div>
+      <button *ngIf="!lastRound" class="button" (click)="nextMatch()">Next Match</button>
+      <button *ngIf="lastRound" class="button" (click)="finishGame()">Finish Game</button>
+    </div>
+    <div class="RPSChoice"
+      [ngStyle]="{ 'background-image': 'url(assets/img/' + aiChoice + '.png)'}"
+    >
+    </div>
+  </div>
+
+
+  <div *ngIf="gameOver" class="center">
+    <img class="fighterImg" src="assets/img/{{ playerFighterCode }}.png" alt="{{ playerFighterCode }}" />
+    <div class="mediumHandWritten">{{ playerFighterDisplay }}</div>
+  </div>
+
+  <div *ngIf="gameOver" class="center">
+    <div class="bigHandWritten">Game Over!</div>
+    <div class="bigSansSerif">You finished {{ place }}. place!</div>
+  </div>
+
+  <!-- TODO: this should be a table -->
+  <div id="containerLeague">
+    <div class="mediumHandWritten"><span class="mediumSansSerif">R|P|S</span> League</div>
+    <div class="containerLeagueTable grid" *ngFor="let fighter of fighters;  let i = index">
+      <div *ngFor="let val of fighter, let j = index">
+        <span *ngIf="j==1 && val==playerFighterDisplay">{{ i + 1 }}. </span>
+        <span class="leaguePlayerEntry" *ngIf="j==1 && val==playerFighterDisplay">{{ val }}</span>
+        <span *ngIf="j==1 && val!=playerFighterDisplay">{{ i + 1 }}. </span>
+        <span *ngIf="j==1 && val!=playerFighterDisplay">{{ val }}</span>
+        <span *ngIf="j==2" style="float: right">{{ val }} Points</span>
+      </div>
+    </div>
+
+    <div class="center marginTop">
+      <button class="button" (click)="newGame()">Start new Game</button>
+    </div>
+  </div>
+  
+</div>

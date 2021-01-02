@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Contrail+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+//@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+
+$cRed: #d0493f;
+$cPink: pink;
+$cWhite: white;
+$cGrey: grey;
+
+//$fSansSerif: 'Quicksand', sans-serif;
+$fSansSerif: 'Share Tech Mono', monospace;
+$fHandWritten: 'Contrail One', cursive;
+
+.grid {
+  display: grid;
+}
+.grid1-4 {
+  grid-column: 1/4;
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+.marginTop {
+  margin-top: 30px;
+}
+
+.bigSansSerif {
+  font: {
+    family: $fSansSerif;
+    size: 3rem;
+  }
+  text-transform: uppercase;
+  color: $cWhite;
+}
+.mediumSansSerif {
+  font: {
+    family: $fSansSerif;
+    size: 2rem;
+  }
+  color: $cWhite;
+}
+.bigHandWritten {
+  font: {
+    family: $fHandWritten;
+    size: 3rem;
+  }
+  text-align: center;
+  color: $cRed;
+}
+.mediumHandWritten {
+  font: {
+    family: $fHandWritten;
+    size: 2rem;
+  }
+  text: {
+    transform: uppercase;
+    align: center;
+  }
+  color: $cRed;
+}
+.fighterImg {
+  height: 129px;
+  width: 83px;
+  border: 2px solid $cPink;
+  transition: border 0.5s;
+  margin: 8px;
+}
+
+#wrapperStart {
+  grid-template-rows: 60px 430px;
+
+  #containerStart {
+    grid-template-columns: auto auto;
+    
+    >div {
+      margin: 5px 15px;
+    }
+    button {
+      margin: 0 auto;
+      display: grid;
+    }
+    .selectable:hover {
+      cursor: pointer;
+      border: 2px solid $cRed;
+      transition: border 0.5s;
+    }
+  }
+}
+
+#wrapper {
+  grid-template-rows: 60px 250px 200px 200px;
+
+  #containerMatch {
+    grid-template-columns: 250px 75px 250px;
+  }
+
+  .RPSChoice {
+    background: {
+      repeat: no-repeat;
+      size: 100px 100px;
+    }
+    height: 100px;
+    width: 100px;
+    margin: 10px;
+    border: 2px solid $cRed;
+    transition: border 0.5s;
+
+    &.playerRPS:hover {
+      cursor: pointer;
+      border: 2px solid $cPink;
+      transition: border 0.5s;
+    }
+  }
+
+  button.button {
+    background: $cRed;
+    padding: 5px 8px;
+    color: $cPink;
+    border: none;
+    font-weight: bold;
+    transition: color 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      color: $cWhite;
+      transition: color 0.5s;
+    }
+  }
+
+  .RPSContainer {
+    grid-template-columns: 120px 120px 120px;
+  }
+
+  #containerLeague {
+    color: $cWhite;
+    font-family: $fSansSerif;
+
+    .containerLeagueTable {
+      grid-template-columns: 0fr 175px 75px;
+
+      .leaguePlayerEntry {
+        color: $cGrey;
+      }
+    }
+  }
+}
